@@ -125,8 +125,6 @@ export const aggregateRepurposedContentNode = async (
         "An engaging email newsletter based on the video, designed to captivate your audience...",
       icon: email_newsletter,
     },
-
-    ,
   ];
 
   return {

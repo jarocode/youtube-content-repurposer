@@ -10,6 +10,7 @@ import {
   faMedium,
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { truncateText } from "./utils/helpers";
 
 interface Content {
   id: string;
@@ -50,44 +51,45 @@ export default function Home() {
 
     // Extract the JSON data from the response
     const result = await res.json();
-    console.log("Data:", result.data);
+    const contentData = result.data;
+    console.log("Data:", contentData);
 
     // // Simulating API call
     // await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Mock generated content
-    const mockContent: Content[] = [
-      {
-        id: "1",
-        platform: "LinkedIn",
-        title: "LinkedIn Post",
-        content:
-          "A professional content of the YouTube content, tailored for your network...",
-      },
-      {
-        id: "2",
-        platform: "X",
-        title: "X Thread",
-        content:
-          "A concise thread summarizing key points, perfect for engagement...",
-      },
-      {
-        id: "3",
-        platform: "Medium",
-        title: "Medium Article",
-        content:
-          "An in-depth article exploring the topic, ready for publication...",
-      },
-      {
-        id: "4",
-        platform: "Email",
-        title: "Newsletter",
-        content:
-          "An engaging email newsletter based on the video, designed to captivate your audience...",
-      },
-    ];
+    // const mockContent: Content[] = [
+    //   {
+    //     id: "1",
+    //     platform: "LinkedIn",
+    //     title: "LinkedIn Post",
+    //     content:
+    //       "A professional content of the YouTube content, tailored for your network...",
+    //   },
+    //   {
+    //     id: "2",
+    //     platform: "X",
+    //     title: "X Thread",
+    //     content:
+    //       "A concise thread summarizing key points, perfect for engagement...",
+    //   },
+    //   {
+    //     id: "3",
+    //     platform: "Medium",
+    //     title: "Medium Article",
+    //     content:
+    //       "An in-depth article exploring the topic, ready for publication...",
+    //   },
+    //   {
+    //     id: "4",
+    //     platform: "Email",
+    //     title: "Newsletter",
+    //     content:
+    //       "An engaging email newsletter based on the video, designed to captivate your audience...",
+    //   },
+    // ];
 
-    setGeneratedContent(mockContent);
+    setGeneratedContent(contentData);
     setIsLoading(false);
   };
 
@@ -132,14 +134,19 @@ export default function Home() {
           <div className="card-container">
             {generatedContent.map((content) => {
               return (
-                <div key={content.id} className="card">
+                <div key={content?.id} className="card">
                   <FontAwesomeIcon
-                    icon={contentIcon[content.platform as IconKey]}
+                    icon={contentIcon[content?.platform as IconKey]}
                     className="card-icon"
                   />
-                  <h3>{content.platform}</h3>
-                  <p>{content.content}</p>
-                  <Link href={`/content/${content.id}`} className="view-button">
+                  <h3>{content?.platform}</h3>
+                  <p>{truncateText(content?.content, 40)}</p>
+                  <Link
+                    href={`/content/${content?.id}?content=${encodeURIComponent(
+                      content.content
+                    )}`}
+                    className="view-button"
+                  >
                     View full content
                   </Link>
                 </div>
