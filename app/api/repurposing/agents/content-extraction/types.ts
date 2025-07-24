@@ -1,17 +1,8 @@
-export interface TranscriptSegment {
-  text: string;
-  start: number;
-  duration: number;
-}
-
 export interface TranscriptResponse {
-  success: boolean;
-  data?: {
-    videoId: string;
-    transcript: TranscriptSegment[];
-  };
-  error?: string;
-  errorType?: "NO_TRANSCRIPT" | "INVALID_URL" | "GENERAL_ERROR";
+  text: string;
+  duration: number;
+  offset: number;
+  lang: string;
 }
 
 export interface ApiError {

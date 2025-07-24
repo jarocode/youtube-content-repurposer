@@ -46,6 +46,7 @@ export default function Home() {
 
     // Check if the response was successful
     if (!res.ok) {
+      setIsLoading(false);
       throw new Error(`HTTP error! status: ${res.status}`);
     }
 

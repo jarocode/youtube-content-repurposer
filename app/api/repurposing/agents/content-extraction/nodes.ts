@@ -8,6 +8,7 @@ import {
   createTwitterPostPrompt,
 } from "./prompt";
 import { RepurposeContentState } from "./state";
+import { TranscriptResponse } from "@danielxceron/youtube-transcript";
 
 const model = LLM.chatOpenAI;
 
@@ -19,7 +20,7 @@ export const getTranscript = async (
   const { videoId } = state;
   const transcriptData = await TranscriptService.getTranscript(videoId);
   const formattedTranscript = transcriptData
-    .map((transcript) => transcript.text)
+    ?.map((transcript: TranscriptResponse) => transcript.text)
     .join(", ");
 
   return {

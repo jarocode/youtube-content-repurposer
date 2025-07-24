@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ckeditor/ckeditor5-react": "^9.5.0",
+    "@danielxceron/youtube-transcript": "^1.2.3",
     "@fortawesome/fontawesome-svg-core": "latest",
     "@fortawesome/free-brands-svg-icons": "latest",
     "@fortawesome/free-solid-svg-icons": "latest",
@@ -69,7 +70,6 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
-    "youtube-transcript": "^1.2.1",
     "zod": "^3.24.1"
   },
   "devDependencies": {

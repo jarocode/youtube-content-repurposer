@@ -1,12 +1,13 @@
-import { TranscriptResponse, YoutubeTranscript } from "youtube-transcript";
-import { TranscriptError, TranscriptSegment } from "./types";
+// import { TranscriptResponse, YoutubeTranscript } from "youtube-transcript";
+
+import { YoutubeTranscript as YoutubeTranscriptAPI } from "@danielxceron/youtube-transcript";
+import { TranscriptError } from "./types";
 
 export class TranscriptService {
-  static async getTranscript(videoId: string): Promise<TranscriptSegment[]> {
+  static async getTranscript(videoId: string) {
     try {
-      const transcript = await YoutubeTranscript.fetchTranscript(videoId);
-
-      return this.formatTranscript(transcript);
+      const transcript = await this.extractor(videoId);
+      return transcript;
     } catch (error) {
       const errorMessage = (error as Error).message.toLowerCase();
 
@@ -28,20 +29,13 @@ export class TranscriptService {
     }
   }
 
-  private static formatTranscript(
-    transcript: TranscriptResponse[]
-  ): TranscriptSegment[] {
-    if (!transcript || transcript.length === 0) {
-      throw new TranscriptError(
-        "Transcript is empty or invalid",
-        "NO_TRANSCRIPT"
-      );
+  static async extractor(videoId: string) {
+    try {
+      const transcript = await YoutubeTranscriptAPI.fetchTranscript(videoId);
+      console.log("transcript:", transcript);
+      return transcript;
+    } catch (error) {
+      console.error("error extracting transcript", error);
     }
-
-    return transcript.map((item) => ({
-      text: item.text,
-      start: item.offset,
-      duration: item.duration,
-    }));
   }
 }
