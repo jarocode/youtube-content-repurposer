@@ -1,19 +1,22 @@
-import "./globals.css"
-import type { Metadata } from "next"
-import { config } from "@fortawesome/fontawesome-svg-core"
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import type React from "react" // Import React
-config.autoAddCss = false
+import type React from "react"; // Import React
+import "./globals.css";
+import type { Metadata } from "next";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+
+import { GeneratedProvider } from "./context/generated-context";
+
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: "AI Content Repurposer",
   description: "Repurpose YouTube content for various platforms",
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -26,8 +29,9 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <GeneratedProvider>{children}</GeneratedProvider>
+      </body>
     </html>
-  )
+  );
 }
-

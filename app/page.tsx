@@ -11,13 +11,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { truncateText } from "./utils/helpers";
+import { useGeneratedContext } from "./context/generated-context";
 
-interface Content {
-  id: string;
-  platform: string;
-  title: string;
-  content: string;
-}
+// interface Content {
+//   id: string;
+//   platform: string;
+//   title: string;
+//   content: string;
+// }
 
 type IconKey = "LinkedIn" | "X" | "Medium" | "Email";
 
@@ -31,7 +32,9 @@ const contentIcon = {
 export default function Home() {
   const [youtubeLink, setYoutubeLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [generatedContent, setGeneratedContent] = useState<Content[]>([]);
+  // const [generatedContent, setGeneratedContent] = useState<Content[]>([]);
+
+  const { generatedContent, setGeneratedContent } = useGeneratedContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

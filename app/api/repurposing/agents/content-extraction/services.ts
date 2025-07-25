@@ -36,6 +36,7 @@ export class TranscriptService {
       return transcript;
     } catch (error) {
       console.error("error extracting transcript", error);
+      throw new Error((error as Error).message);
     }
   }
 }
