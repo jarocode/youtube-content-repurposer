@@ -83,7 +83,7 @@ export default function Home() {
               />
             </div>
             <button type="submit" className="submit-button">
-              Generate Content
+              Generate
             </button>
           </form>
         </div>
