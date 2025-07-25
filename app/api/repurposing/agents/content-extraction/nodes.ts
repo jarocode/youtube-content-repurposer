@@ -38,7 +38,8 @@ export const createLinkedinPostNode = async (
   const prompt = PromptTemplate.fromTemplate(createLinkedPostPrompt);
   const chain = prompt.pipe(model);
   const result = await chain.invoke({ transcript: youtube_transcript });
-  console.log("linkedin post:", result.content);
+  console.log("--LINKEDIN POST--:");
+  console.log(result.content);
   const linkedin_post = result.content;
   return {
     linkedin_post,
@@ -89,7 +90,8 @@ export const createEmailNewsLetterNode = async (
   const prompt = PromptTemplate.fromTemplate(createEmailNewsLetterPrompt);
   const chain = prompt.pipe(model);
   const result = await chain.invoke({ transcript: youtube_transcript });
-  console.log(" email newsletter:", result.content);
+  console.log("--EMAIL NEWSLETTER--");
+  console.log(result.content);
   const email_newsletter = result.content;
   return {
     email_newsletter,
@@ -122,9 +124,7 @@ export const aggregateRepurposedContentNode = async (
       id: "4",
       platform: "Email",
       title: "Newsletter",
-      content:
-        "An engaging email newsletter based on the video, designed to captivate your audience...",
-      icon: email_newsletter,
+      content: email_newsletter,
     },
   ];
 

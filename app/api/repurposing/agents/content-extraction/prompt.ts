@@ -88,6 +88,7 @@ You are given a youtube transcript and you need to create an email newsletter fr
  NOTE: 
   1.you are to provide only the post and not the outline
   2.you are to provide the post in markdown format
+  3. Avoid adding triple backticks with markdown delimiters i.e '\`\`\` markdown'to your post
  
   youtube transcript : {transcript}
 `;

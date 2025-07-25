@@ -13,13 +13,6 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { truncateText } from "./utils/helpers";
 import { useGeneratedContext } from "./context/generated-context";
 
-// interface Content {
-//   id: string;
-//   platform: string;
-//   title: string;
-//   content: string;
-// }
-
 type IconKey = "LinkedIn" | "X" | "Medium" | "Email";
 
 const contentIcon = {
@@ -32,9 +25,9 @@ const contentIcon = {
 export default function Home() {
   const [youtubeLink, setYoutubeLink] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // const [generatedContent, setGeneratedContent] = useState<Content[]>([]);
 
-  const { generatedContent, setGeneratedContent } = useGeneratedContext();
+  const { generatedContent, setGeneratedContent, setDisplayedContent } =
+    useGeneratedContext();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,41 +50,6 @@ export default function Home() {
     const result = await res.json();
     const contentData = result.data;
     console.log("Data:", contentData);
-
-    // // Simulating API call
-    // await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    // Mock generated content
-    // const mockContent: Content[] = [
-    //   {
-    //     id: "1",
-    //     platform: "LinkedIn",
-    //     title: "LinkedIn Post",
-    //     content:
-    //       "A professional content of the YouTube content, tailored for your network...",
-    //   },
-    //   {
-    //     id: "2",
-    //     platform: "X",
-    //     title: "X Thread",
-    //     content:
-    //       "A concise thread summarizing key points, perfect for engagement...",
-    //   },
-    //   {
-    //     id: "3",
-    //     platform: "Medium",
-    //     title: "Medium Article",
-    //     content:
-    //       "An in-depth article exploring the topic, ready for publication...",
-    //   },
-    //   {
-    //     id: "4",
-    //     platform: "Email",
-    //     title: "Newsletter",
-    //     content:
-    //       "An engaging email newsletter based on the video, designed to captivate your audience...",
-    //   },
-    // ];
 
     setGeneratedContent(contentData);
     setIsLoading(false);
@@ -143,12 +101,11 @@ export default function Home() {
                     icon={contentIcon[content?.platform as IconKey]}
                     className="card-icon"
                   />
-                  <h3>{content?.platform}</h3>
-                  <p>{truncateText(content?.content, 40)}</p>
+                  {/* <h3>{content?.platform}</h3> */}
+                  <p>{truncateText(content?.content, 30)}</p>
                   <Link
-                    href={`/content/${content?.id}?content=${encodeURIComponent(
-                      content.content
-                    )}`}
+                    onClick={() => setDisplayedContent(content)}
+                    href={`/content/${content?.id}`}
                     className="view-button"
                   >
                     View full content

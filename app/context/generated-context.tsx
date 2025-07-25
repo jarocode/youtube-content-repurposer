@@ -17,6 +17,8 @@ interface Content {
 interface GeneratedContext {
   generatedContent: Content[];
   setGeneratedContent: Dispatch<SetStateAction<Content[]>>;
+  displayedContent: Content;
+  setDisplayedContent: Dispatch<SetStateAction<Content>>;
 }
 
 // defaultValue only used for type inference; won't actually be read
@@ -24,10 +26,21 @@ export const generatedContext = createContext<GeneratedContext | null>(null);
 
 export function GeneratedProvider({ children }: { children: React.ReactNode }) {
   const [generatedContent, setGeneratedContent] = useState<Content[]>([]);
+  const [displayedContent, setDisplayedContent] = useState<Content>({
+    id: "",
+    platform: "",
+    title: "",
+    content: "",
+  });
 
   return (
     <generatedContext.Provider
-      value={{ generatedContent, setGeneratedContent }}
+      value={{
+        generatedContent,
+        setGeneratedContent,
+        displayedContent,
+        setDisplayedContent,
+      }}
     >
       {children}
     </generatedContext.Provider>

@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faShare,
@@ -11,16 +10,11 @@ import {
   faEye,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
+import { useGeneratedContext } from "@/app/context/generated-context";
 
 export default function ContentPage() {
-  const searchParams = useSearchParams();
-  const paramContent = searchParams.get("content");
   const [isEditing, setIsEditing] = useState(false);
-  const [content, setContent] = useState(``);
-
-  useEffect(() => {
-    if (paramContent) setContent(decodeURIComponent(paramContent));
-  }, []);
+  const { displayedContent, setDisplayedContent } = useGeneratedContext();
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -65,8 +59,13 @@ export default function ContentPage() {
           <div className="editor-container">
             <textarea
               className="editor"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={displayedContent.content}
+              onChange={(e) =>
+                setDisplayedContent({
+                  ...displayedContent,
+                  content: e.target.value,
+                })
+              }
             ></textarea>
             <div className="editor-actions">
               <button className="editor-button" onClick={handlePreview}>
@@ -79,7 +78,7 @@ export default function ContentPage() {
           </div>
         ) : (
           <div className="content-body">
-            {content.split("\n\n").map((paragraph, index) => (
+            {displayedContent.content.split("\n\n").map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>
