@@ -14,8 +14,8 @@ export const createLinkedPostPrompt = `You are an expert content creator on link
 
  NOTE: 
   1.you are to provide only the post and not the outline
-  2.you are to provide the post in markdown format
-  3. Avoid adding triple backticks with markdown delimiters i.e '\`\`\` markdown'to your post
+  2.you are to provide the post in html format using proper formatting and spacing according to linkedin post standard formats
+  3. Avoid adding triple backticks with html delimiters i.e '\`\`\` html'to your post
   
   youtube transcript : {transcript}
 
@@ -37,8 +37,8 @@ export const createTwitterPostPrompt = ` You are an experienced content creator 
 
  NOTE: 
   1.you are to provide only the post and not the outline
-  2.you are to provide the post in markdown format
-  3. Avoid adding triple backticks with markdown delimiters i.e '\`\`\` markdown'to your post
+  2.you are to provide the post in html format using proper formatting and spacing according to twitter or X post standard formats
+  3. Avoid adding triple backticks with html delimiters i.e '\`\`\` html'to your post
 
  youtube transcript : {transcript}
  
@@ -66,8 +66,8 @@ export const createMediumPostPrompt = `You are an expert content creator and art
 
  NOTE: 
   1.you are to provide only the post and not the outline
-  2.you are to provide the post in markdown format
-  3. Avoid adding triple backticks with markdown delimiters i.e '\`\`\` markdown'to your post
+ 2.you are to provide the post in html format using proper formatting and spacing according to medium article standard formats.
+  3. Avoid adding triple backticks with html delimiters i.e '\`\`\` html'to your post
  
  `;
 
@@ -87,8 +87,8 @@ You are given a youtube transcript and you need to create an email newsletter fr
 
  NOTE: 
   1.you are to provide only the post and not the outline
-  2.you are to provide the post in markdown format
-  3. Avoid adding triple backticks with markdown delimiters i.e '\`\`\` markdown'to your post
+  2.you are to provide the post in html format using proper formatting and spacing according to email newsletter standard formats
+  3. Avoid adding triple backticks with html delimiters i.e '\`\`\` html' to  any part of the newsletter 
  
   youtube transcript : {transcript}
 `;

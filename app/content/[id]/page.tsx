@@ -11,13 +11,16 @@ import {
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { useGeneratedContext } from "@/app/context/generated-context";
+import ClientSideCustomEditor from "@/components/ui/client-side-custom-editor";
 
 export default function ContentPage() {
   const [isEditing, setIsEditing] = useState(false);
   const { displayedContent, setDisplayedContent } = useGeneratedContext();
 
+  const [editorData, setEditorData] = useState(displayedContent.content);
+
   const handleEdit = () => {
-    setIsEditing(true);
+    setIsEditing((prev) => !prev);
   };
 
   const handleSave = () => {
@@ -33,7 +36,9 @@ export default function ContentPage() {
     <div className="container content-page">
       <div className="content-container">
         <div className="content-header">
-          <h2 className="content-title">Content for Platform</h2>
+          <h2 className="content-title">
+            Content for {displayedContent.platform}
+          </h2>
           <div className="action-icons">
             <FontAwesomeIcon
               icon={faShare}
@@ -57,16 +62,10 @@ export default function ContentPage() {
         </div>
         {isEditing ? (
           <div className="editor-container">
-            <textarea
-              className="editor"
-              value={displayedContent.content}
-              onChange={(e) =>
-                setDisplayedContent({
-                  ...displayedContent,
-                  content: e.target.value,
-                })
-              }
-            ></textarea>
+            <ClientSideCustomEditor
+              data={editorData}
+              onChange={setEditorData}
+            />
             <div className="editor-actions">
               <button className="editor-button" onClick={handlePreview}>
                 <FontAwesomeIcon icon={faEye} className="button-icon" /> Preview
@@ -77,11 +76,10 @@ export default function ContentPage() {
             </div>
           </div>
         ) : (
-          <div className="content-body">
-            {displayedContent.content.split("\n\n").map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
+          <div
+            className="content-body"
+            dangerouslySetInnerHTML={{ __html: displayedContent.content }}
+          ></div>
         )}
       </div>
     </div>

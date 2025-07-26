@@ -82,8 +82,12 @@ export default function Home() {
                 required
               />
             </div>
-            <button type="submit" className="submit-button">
-              Generate
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "Generate"}
             </button>
           </form>
         </div>
@@ -92,7 +96,7 @@ export default function Home() {
       <main className="container">
         {isLoading && <div className="loader"></div>}
 
-        {generatedContent.length > 0 && (
+        {generatedContent.length > 0 && !isLoading && (
           <div className="card-container">
             {generatedContent.map((content) => {
               return (
@@ -102,7 +106,11 @@ export default function Home() {
                     className="card-icon"
                   />
                   {/* <h3>{content?.platform}</h3> */}
-                  <p>{truncateText(content?.content, 30)}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: truncateText(content?.content, 30),
+                    }}
+                  ></p>
                   <Link
                     onClick={() => setDisplayedContent(content)}
                     href={`/content/${content?.id}`}
